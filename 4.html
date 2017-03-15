@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <meta charset="UTF-8">
+    <title>  ﾟ｡･ﾟ･｡ ･ﾟ｡ </title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="moons.ico/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="moons.ico/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="moons.ico/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="moons.ico/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="moons.ico/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="moons.ico/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="moons.ico/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="moons.ico/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="moons.ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="moons.ico/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="moons.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="moons.ico/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="moons.ico/favicon-16x16.png">
+    <link rel="manifest" href="moons.ico/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="moons.ico/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Faster+One|Fugaz+One|Shrikhand|Sonsie+One');
+   @import url('https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro:300|Yantramanav:300');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .site_header {
+            height: 130px;
+            width: 100%;
+            padding: 16px 15px;
+        }
+
+        .header_text {
+            text-decoration: none;
+            color: white;
+            //font-size: 18px;
+            font-family: 'Fugaz One', cursive;
+            font-size: 29px;
+        }
+
+        #.header_text:hover {
+        #   color: white;
+        #   background-color: black;
+        #}
+
+        #.header_text:active {
+        #   color: yellow;
+        #   background-color: crimson;
+        #}
+
+        #sideMenu {
+            width: 230px;
+            height: 500px;
+            padding: 0px 0px;
+            line-height:1.4em;
+        }
+
+        #sideMenu ul{
+            width: 190px;
+            height: 500px;
+            position: absolute;
+            top: 0px;
+            left: 40px;
+            white-space: nowrap;
+
+        }
+
+        #sideMenu ul li {
+            width: 190px;
+            list-style: none;
+            color: black;
+            //float: left;
+        }
+
+        #sideMenu .menuLink {
+            text-decoration: none;
+            color: black;
+            font-size: 12px;
+            //font-weight: bold;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #sideMenu .menuLinke {
+            text-decoration: none;
+            color: LightGray;
+            font-size: 12px;
+            //font-weight: bold;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #sideMenu .menuLink4 {
+            text-decoration: none;
+            color: black;
+            background-color: yellow; //#B0E0E6;
+            font-size: 12px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #sideMenu .menuLink:hover {
+            color: gray;
+            font-size: 12px;
+            background-color: #98ff98;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #sideMenu .menuLinke:hover {
+            color: LightGray;
+            font-size: 12px;
+            background-color: #98ff98;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        #sideMenu .moon {
+            width: 20%;
+            margin: 100px 0 0 0;
+        }
+
+        .contents {
+            margin: 0px 0 0 0;
+            padding: 0px;
+            left: 200px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <div class="site_header">
+        <a class="header_text" href="index.html"> >> moonshot projects  << </a>
+    </div>
+
+    <!--<nav id="sideMenu" style="float:left; width: 18%"> -->
+
+    <nav id="sideMenu" style="position: absolute; float: left; width: 200px; ">
+        <ul>
+            <li><a class="menuLink" href="1.html"> first menu link </a></li>
+            <li><a class="menuLink" href="2.html"> second menu link </a></li>
+            <li><a class="menuLink" href="3.html"> third menu link </a></li>
+            <li><a class="menuLink4" href="4.html"> fourth menu link </a></li>
+            <li><a class="menuLink" href="5.html"> fifth menu link </a></li>
+            <li><a class="menuLink" href="6.html"> sixth menu link </a></li>
+            <li><a class="menuLinke" href="7.html"> about YunJin LEE </a></li>
+        </ul>
+        <!-- <a class="moon" href="#"><img src="moon.png" width="50%" margin="100px"></a> -->
+    </nav>
+    <!--<div class="contents" style="border:1px solid gray; float:left; width: 76%; height: 515px; padding: 15px;"> -->
+   <div class="contents" style="position: absolute; border:1px solid white; float:left; width: 700px; height: 500px; padding: 5px;">
+        <h4> title </h4>
+        <h6> </h6>
+        <br>
+        <h6> subtitle </h6>
+        <img src="fotos/d1.jpg" style="width:100%;">
+        <br>
+        <br>
+        <h6> subtitle </h6>
+        <img src="fotos/d2.jpg" style="width:100%;">
+        <br>
+        <br>
+        <h6> subtitle </h6>
+        <img src="fotos/d3.jpg" style="width:100%;">
+        <br>
+        <br>
+     </div>
+
+</body>
+</html>
