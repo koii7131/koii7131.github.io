@@ -1,157 +1,335 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <meta charset="UTF-8">
-    <title>  ﾟ｡･ﾟ･｡ ･ﾟ｡ </title>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Space template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-    <!-- favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="moons.ico/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="moons.ico/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="moons.ico/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="moons.ico/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="moons.ico/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="moons.ico/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="moons.ico/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="moons.ico/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="moons.ico/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="moons.ico/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="moons.ico/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="moons.ico/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="moons.ico/favicon-16x16.png">
-    <link rel="manifest" href="moons.ico/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="moons.ico/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/ionicons.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/responsive.css">
 
-    <style>
-    @import url('https://fonts.googleapis.com/css?family=Faster+One|Fugaz+One|Shrikhand|Sonsie+One');
-    @import url('https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro:300|Yantramanav:300');
+    <!-- Js -->
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/min/waypoints.min.js"></script>
+    <script src="js/jquery.counterup.js"></script>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="js/google-map-init.js"></script>
 
-        .site_header {
-            height: 130px;
-            width: 100%;
-            padding: 16px 15px;
-        }
+    <script src="js/main.js"></script>
 
-        .header_text {
-            text-decoration: none;
-            color: white;
-            //font-size: 18px;
-            font-family: 'Fugaz One', cursive;
-            font-size: 29px;
-        }
-
-        #.header_text:hover {
-        #   color: white;
-        #   background-color: black;
-        #}
-
-        #.header_text:active {
-        #   color: yellow;
-        #   background-color: crimson;
-        #}
-
-        #sideMenu {
-            width: 230px;
-            height: 500px;
-            padding: 0px 0px;
-            line-height:1.4em;
-        }
-
-        #sideMenu ul{
-            width: 190px;
-            height: 500px;
-            position: absolute;
-            top: 0px;
-            left: 40px;
-            white-space: nowrap;
-
-        }
-
-        #sideMenu ul li {
-            width: 190px;
-            list-style: none;
-            color: black;
-            //float: left;
-        }
-
-        #sideMenu .menuLink {
-            text-decoration: none;
-            color: black;
-            font-size: 12px;
-            //font-weight: bold;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        #sideMenu .menuLinke {
-            text-decoration: none;
-            color: LightGray;
-            font-size: 12px;
-            //font-weight: bold;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        #sideMenu .menuLink:hover {
-            color: gray;
-            font-size: 12px;
-            background-color: #98ff98;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        #sideMenu .menuLinke:hover {
-            color: LightGray;
-            font-size: 12px;
-            background-color: #98ff98;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        #sideMenu .moon {
-            width: 20%;
-            margin: 100px 0 0 0;
-        }
-
-        .contents {
-            margin: 0px 0 0 0;
-            padding: 0px;
-            left: 210px;
-        }
-
-    </style>
-</head>
+  </head>
+  <body>
 
 
-<body>
-    <div class="site_header">
-        <a class="header_text" href="index.html"> >> moonshot projects  << </a>
-    </div>
-
-    <!--<nav id="sideMenu" style="float:left; width: 18%"> -->
-
-    <nav id="sideMenu" style="position: absolute; float: left; width: 200px; ">
-        <ul>
-            <li><a class="menuLink" href="1.html"> arizona 2014 </a></li>
-            <li><a class="menuLink" href="2.html"> sky blue eyes </a></li>
-            <li><a class="menuLink" href="3.html"> au top du top </a></li>
-            <li><a class="menuLink" href="4.html"> summer breeze </a></li>
-            <li><a class="menuLink" href="5.html"> light night </a></li>
-            <li><a class="menuLink" href="6.html"> cookie friends </a></li>
-            <li><a class="menuLinke" href="7.html"> about YunJin LEE </a></li>
-        </ul>
-        <!-- <a class="moon" href="#"><img src="moon.png" width="50%" margin="100px"></a> -->
-    </nav>
-    <!--<div class="contents" style="border:1px solid gray; float:left; width: 76%; height: 515px; padding: 15px;"> -->
-    <div class="contents" style="position: absolute; border:1px solid white; float:left; width: 800px; height: 500px; padding: 5px;">
-        <h4> welcome :) </h4>
-        <br>
-
+    <!-- Header Start -->
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <!-- header Nav Start -->
+          <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                  <img src="img/logo.png" alt="Logo">
+                </a>
+              </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="work.html">Work</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Service</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                  </ul>
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav>
+          </div>
+        </div>
       </div>
+    </header><!-- header close -->
 
-</body>
+    <!-- Slider Start -->
+    <section id="slider">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-2">
+            <div class="block">
+              <h1 class="animated fadeInUp">프로그래밍 학습 저장소</h1>
+              <p class="animated fadeInUp">LYJ</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Wrapper Start -->
+    <section id="intro">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7 col-sm-12">
+            <div class="block">
+              <div class="section-title">
+                <h2>웹개발</h2> </div>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
+              <div class="lis">
+              <li><a href="http://unvertige.pythonanywhere.com/" target="_blank">The Quotes - Python, Django</a></li>
+              <li><a href="#">The Lyrics - Python, Django</a></li>
+              <li><a href="photobook/index_photobook.html" target="_blank">Photobook - HTML, CSS </a></li>
+            </div>
+            </div>
+          </div><!-- .col-md-7 close -->
+          <div class="col-md-5 col-sm-12">
+            <div class="block">
+              <img src="img/wrapper-img.gif" alt="Img">
+            </div>
+          </div><!-- .col-md-5 close -->
+        </div>
+      </div>
+    </section>
+
+  <section id="feature">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+          <h2>데이터분석 및 시각화</h2>
+          <p>Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <li class="link-in"><a href="election/index.html" target="_blank">19th Election - Python, R, Excel, Illustrator</a></li>
+          <li class="link-in"><a href="#" target="_blank">Text Analysis - Python, R</a></li>
+          <li class="link-in"><a href="seoul/weather.html" target="_blank">Seoul's Weather - Python, JavaScript, D3</a></li>
+          <li class="link-in"><a href="viz/clock.html" target="_blank">Active Clock - JavaScript, D3</a></li>
+          <li class="link-in"><a href="viz/barGraph.html" target="_blank">Active Bar Graph - JavaScript, D3</a></li><br>
+          <a href="https://unvertige123.wordpress.com/" class="btn btn-view-works" target="_blank">View Blog</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Service Start -->
+<!--    <section id="service">
+      <div class="container">
+        <div class="row">
+          <div class="section-title">
+            <h2>Profession and Interests</h2>
+            <!--<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics</p>-->
+<!--          </div>
+        </div>
+        <div class="row ">
+          <div class="col-sm-6 col-md-3">
+            <div class="service-item">
+              <i class="icon ion-coffee"></i>
+              <h4>Marketing</h4>
+              <p>-Minored in Business <br> -RA @Private Equity Firm <br> -Data Analyst @Marketing Consulting Group </p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="service-item">
+              <i class="ion-compass"></i>
+              <h4>Data Analysis</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="service-item">
+              <i class="ion-image"></i>
+              <h4>App Design</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="service-item">
+              <i class="ion-bug"></i>
+              <h4>Start Up</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="service-item">
+              <i class="ion-headphone"></i>
+              <h4>Logo Design</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="service-item">
+              <i class="ion-leaf"></i>
+              <h4>Development</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="service-item">
+              <i class="ion-planet"></i>
+              <h4>Brand Identity</h4>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div class="service-item">
+              <i class="ion-earth"></i>
+              <h4>Language</h4>
+              <p>Fluent in Korean, English and French. Conversable in Japanese. Been to 20+ countries!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+    <!-- Call to action Start -->
+    <section id="call-to-action">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="block">
+              <h2>We design delightful digital experiences.</h2>
+              <p>Read more about what we do and our philosophy of design. Judge for yourself The work and results we’ve achieved for other clients, and meet our highly experienced Team who just love to design.</p>
+              <a class="btn btn-default btn-call-to-action" href="#" >Tell Us Your Story</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Content Start -->
+    <section id="testimonial">
+      <div class="container">
+        <div class="row">
+          <div class="section-title text-center">
+            <h2>Fun Facts About Us</h2>
+            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="block">
+              <ul class="counter-box clearfix">
+                <li>
+                  <div class="block">
+                    <i class="ion-ios-chatboxes-outline"></i>
+                    <h4 class="counter">20000</h4>
+                    <span>Cups Of Coffee</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="block">
+                    <i class="ion-ios-glasses-outline"></i>
+                    <h4 class="counter">20000</h4>
+                    <span>Cups Of Coffee</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="block">
+                    <i class="ion-ios-compose-outline"></i>
+                    <h4 class="counter">20000</h4>
+                    <span>Cups Of Coffee</span>
+                  </div>
+                </li>
+                <li>
+                  <div class="block">
+                    <i class="ion-ios-timer-outline"></i>
+                    <h4 class="counter">20000</h4>
+                    <span>Cups Of Coffee</span>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="testimonial-carousel">
+              <div id="testimonial-slider" class="owl-carousel">
+                <div>
+                    <img src="img/cotation.png" alt="IMG">
+                    <p>"This Company created an e-commerce site with the tools to make our business a success, with innovative ideas we feel that our site has unique elements that make us stand out from the crowd."</p>
+                    <div class="user">
+                      <img src="img/item-img1.jpg" alt="Pepole">
+                      <p><span>Rose Ray</span> CEO</p>
+                    </div>
+                </div>
+                <div>
+                  <img src="img/cotation.png" alt="IMG">
+                    <p>"This Company created an e-commerce site with the tools to make our business a success, with innovative ideas we feel that our site has unique elements that make us stand out from the crowd."</p>
+                    <div class="user">
+                      <img src="img/item-img1.jpg" alt="Pepole">
+                      <p><span>Rose Ray</span> CEO</p>
+                    </div>
+                </div>
+                <div>
+                  <img src="img/cotation.png" alt="IMG">
+                    <p>"This Company created an e-commerce site with the tools to make our business a success, with innovative ideas we feel that our site has unique elements that make us stand out from the crowd."</p>
+                    <div class="user">
+                      <img src="img/item-img1.jpg" alt="Pepole">
+                      <p><span>Rose Ray</span> CEO</p>
+                    </div>
+                </div>
+                <div>
+                  <img src="img/cotation.png" alt="IMG">
+                    <p>"This Company created an e-commerce site with the tools to make our business a success, with innovative ideas we feel that our site has unique elements that make us stand out from the crowd."</p>
+                    <div class="user">
+                      <img src="img/item-img1.jpg" alt="Pepole">
+                      <p><span>Rose Ray</span> CEO</p>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- footer Start -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="footer-manu">
+              <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">How it works</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">Terms</a></li>
+              </ul>
+            </div>
+            <p>Copyright &copy; Crafted by <a href="https://dcrazed.com/">Dcrazed</a>.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+
+
+    </body>
 </html>

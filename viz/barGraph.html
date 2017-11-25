@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Horizontal Bar Graph</title>
+  <!-- D3 웹사이트에서 D3 코드를 불러오기 -->
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+      /* HTML body 요소의 기본 여백 제거 */
+    body {
+      margin: 0;
+    }
+
+    /*
+      데이터가 아닌 요소들이 지나치게 강조되지 않도록 하기 위해
+      축 관련 요소들의 색상을 조금 흐리게.
+
+      하지만 지나치게 흐려지면 가독성이 떨어지므로 주의하기.
+
+      참고: Edward Tufte의 "data-ink radio"
+
+      ".axis text"에 대하여:
+
+      - 점(.)으로 시작하는 선택자는 클래스 선택자.
+        ".axis"는 "axis"라는 클래스가 부여된 모든 요소를 선택하라는 뜻.
+      - 일반 알파벳으로 구성된 선택자는 요소 선택자.
+        "text"는 모든 text 요소를 선택하라는 뜻.
+      - 선택자 두 개가 공백으로 연결되어 있으면 첫번째 기준으로 선택한
+        요소의 하위에 속한 요소들 중에서 두번째 기준을 적용하여 다시
+        걸러내라는 뜻. ".axis text"는 "axis 클래스를 가지는 모든
+        요소의 하위에 있는 모든 text 요소를 선택하라"는 의미.
+    */
+    .axis text { fill: #888; }
+    .axis line { stroke: #888; }
+    .axis path { stroke: #888; }
+
+    /*
+      막대 색상도 지나치게 강하지 않도록.
+
+      참고: Edward Tufte의 "The Smallest Effective Difference"
+     */
+    .bar rect {
+      fill: #526a96;
+    }
+
+    </style>
+</head>
+<body>
+<script>
+    // 상하좌우 여백 수치. 하단에는 축이 그려져야 하니까 여백을 많이.
+var LEFT = 20;
+var RIGHT = 20;
+var TOP = 20;
+var BOTTOM = 30;
+
+// 데이터가 그려질 영역의 크기
+var width = window.innerWidth - LEFT - RIGHT;
+var height = window.innerHeight - TOP - BOTTOM;
+
+// body 요소 밑에 svg 요소를 추가하고 그 결과를 svg 변수에 저장
+var body = d3.select('body');
+var svg = body.append('svg');
+// 위의 두 줄 = var svg = d3.select('body').append('svg');
+
+// svg 요소의 너비와 높이가 화면을 꽉 채우도록 수정
+svg
+  .attr('width', window.innerWidth)
+  .attr('height', window.innerHeight);
+
+// svg 요소에 g 요소를 추가하고 axisGroup 변수에 저장
+var axisGroup = svg.append('g');
+// axisGroup에 "axis" 클래스를 부여하고 하단으로 이동
+axisGroup
+  .attr('class', 'axis')
+  .style('transform', 'translate(' + LEFT + 'px, ' + (TOP + height) + 'px)');
+
+// svg 요소에 g 요소를 추가하고 barGroup 변수에 저장
+var barGroup = svg.append('g');
+// barGroup에 "bar" 클래스를 부여하고 좌상단 여백만큼 이동
+barGroup
+  .attr('class', 'bar')
+  .style('transform', 'translate(' + LEFT + 'px, ' + TOP + 'px)');
+
+// 반복적으로 실행될 코드만 모아서 update라는 이름의 함수로 정의
+var lastUpdate = Date.now();
+
+//5초에 한번씩 화면 그리기! (대신 탭이 화면에 보이지 않을 때 그리지 않는다.)
+function update() {
+  window.requestAnimationFrame(update);
+  var now = Date.now();
+  if (now - lastUpdate < 2000) return;
+  lastUpdate = now;
+
+  // 점수 만들기
+  // 1. 점수들을 담을 빈 배열(array)을 생성하고 scores 변수에 저장
+  var scores = [];
+  // 2. 점수를 몇 개 만들어낼지 정해서 변수 n에 저장. ((곱하는 값) + 0개에서 5개) 사이.
+  var n = Math.round(Math.random() * 5 + 12);
+  // 3. 0에서 100 사이 임의의 점수를 n개 만들어내기
+  //for(초기값, 조건값, 증가값){실행시킬 내용};
+  for(var i = 0; i < n; i++) {
+    scores.push(Math.random() * 100);
+  }
+
+  // X축 스케일 정의하기
+  // 1. 점수를 픽셀로 변환하기 위해 d3의 선형스케일(linear scale) 함수를 만들고
+  //    xScale 변수에 저장
+  var xScale = d3.scaleLinear();
+  // 2. 스케일 함수의 정의역(domain)은 0부터 scores 중 최대값 사이.
+  //    스케일 함수의 치역(range)은 0부터 화면 너비까지.
+  xScale
+    .domain([0, d3.max(scores)])
+    .range([1, width]);
+
+  // Y축 스케일 정의하기
+  var yScale = d3.scaleBand();
+    yScale
+    .domain(d3.range(n))
+    .padding(0.07)
+    .rangeRound([0, height]);
+
+  // X축 그리기
+  // 1. d3의 하단축(axis bottom) 함수를 만들고 xAxis 변수에 저장
+  var xAxis = d3.axisBottom();
+  // 2. xAxis 함수가 위에서 정의한 xScale 스케일 함수를 이용하도록 설정
+  xAxis.scale(xScale);
+  // 3. axisGroup 요소에 축 그리기
+  axisGroup
+    // 애니메이션 효과를 주며 X축을 갱신
+    .transition()
+    .call(xAxis);
+
+  // 막대 그리기
+  var barUpdate = barGroup.selectAll('rect').data(scores);
+  // 1. 업데이트 셀렉션: 너비만 갱신
+  barUpdate
+    // 애니메이션을 통해 현재의 너비를 갱신
+    .transition()
+    .attr('width', function(d, i) {return xScale(d);})
+    .attr('height', yScale.bandwidth)
+    .attr('y', function(d, i) {return yScale(i);});
+
+  // 2. 엔터 셀렉션: rect 요소를 생성하고 높이, y좌표, 너비를 모두 설정
+  var barEnter = barUpdate.enter();
+  barEnter
+    .append('rect')
+    .attr('height', yScale.bandwidth)
+    .attr('y', function(d, i) {return yScale(i);})
+    // 일단 너비 0에서 시작한 후...
+    .attr('width', 0)
+    // ...원래 크기로 늘어나는 애니메이션
+    .transition()
+    .attr('width', function(d, i) {return xScale(d);});
+
+  // 3. 엑시트 셀렉션: rect 요소 제거하기
+  var barExit = barUpdate.exit();
+  barExit
+    // 너비를 0으로 줄이는 애니메이션을 보여준 후...
+    .transition()
+    .attr('width', 0)
+    // ...막대를 제거하기
+    .remove();
+}
+
+// update 함수를 바로 호출하여 일단 화면을 한 번 그리기
+update();
+
+
+
+// update 함수를 2초 간격으로 호출
+//window.setInterval(update, 4000);
+
+// 과제? 하단 축과 막대 사이의 간격이 벌어진 문제 해결하기.
+//
+// - 이게 왜 문제인가? 불필요한 시선의 이동.
+// - 시선이 왜 이동하나? 한눈에 안들어오니까.
+// - 한눈에 왜 안들어오나? 눈의 중심와(fovea centralis)의 시야각이 좁아서
+
+</script>
+</body>
+</html>

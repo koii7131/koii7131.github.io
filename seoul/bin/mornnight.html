@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+<link rel="stylesheet" href="seoulcss.css" type="text/css">
+</head>
+
+<svg width="960" height="500"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+var line0 = d3.line()
+    //.curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.tnight); })
+var line1 = d3.line()
+    //.curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.tmorn); });
+var svg = d3.select("svg"),
+    margin = {top: 20, right: 80, bottom: 30, left: 50},
+    width = svg.attr("width") - margin.left - margin.right,
+    height = svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var parseTime = d3.timeParse("%Y-%m-%d");
+
+var x = d3.scaleTime().range([0, width]),
+    y = d3.scaleLinear().range([height, 0]);
+
+var area = d3.area()
+    //.curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y0(function(d) { return y(d.tnight); })
+    .y1(function(d) { return y(d.tmorn); });
+
+d3.csv("final.csv", type, function(error, data) {
+  if (error) throw error;
+
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+
+  y.domain([
+      d3.min(data, function(d) {return d.tnight;}),
+      d3.max(data, function(d) {return d.tmorn;})
+  ]);
+
+  g.append("g")             //upper line
+      .attr("class", "line0")
+      .append("path")
+      .attr('fill', 'none')
+      .attr('stroke', 'blue')
+      .attr('stroke-width', 3)
+      //.style("stroke-dasharray", ("10,3"))
+      .attr("d", line0(data))
+      .style("opacity", .4);
+  g.append("g")             //lower line
+      .attr("class", "line1")
+      .append("path")
+      .attr('fill', 'none')
+      .attr('stroke', 'red')
+      .attr('stroke-width', 3)
+      //.style("stroke-dasharray", ("10,3"))
+      .attr("d", line1(data))
+      .style("opacity", .4);   
+  g.append("g")             //area
+      .attr("class", "area")
+      .append("path")
+      .attr('fill', '#EEE')
+      .attr("d", area(data));
+  g.append("g")             //xAxis
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).tickSizeInner(-height));
+  g.append("g")             //yAxis
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(y).tickSizeInner(-width))
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("fill", "#000")
+      .text("Temperature, ºC");
+
+//  var time = g.selectAll(".time")
+//    .data(times)
+//    .enter().append("g")
+//      .attr("class", "time");
+//
+//  time.append("path")
+//      .attr("class", "line")
+//      .attr("d", function(d) { return line(d.values); })
+//      .style("stroke", function(d) { return z(d.id); });
+//
+//  time.append("text")
+//      .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
+//      .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")"; })
+//      .attr("x", 3)
+//      .attr("dy", "0.35em")
+//      .style("font", "10px sans-serif")
+//      .text(function(d) { return d.id; });
+});
+    
+function type(d, _, columns) {
+  d.date = parseTime(d.date);
+  for (var i = 2, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
+  return d;
+}
+
+</script>
+<body>
+    
+<div class="wrap">
+    <a href="index.html" class="button">Min & Max</a>
+    <a href="mornnight.html" class="button_a">Morning & Night</a>
+    <a href="dayeve.html" class="button">Day & Evening</a>
+    <a href="hum.html" class="button">Humidity</a>
+</div>
+
+</body>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 19th Election </title>
+<style>
+    <!--/*html, body { margin:0; padding:0; }*/-->
+
+    #firstDiv {
+        border:1px solid antiquewhite;
+        height: 170px;
+        width: 950px;
+        line-height: 170px;
+        text-align: center;
+        position: relative;
+        background-image: url("header.png");
+        background-size: 100%;
+        /*opacity: 0.2;*/
+    }
+
+    /*#firstDiv:after {
+        content : "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: url("vote.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 10%;
+        opacity: 0.2;
+        z-index: -1;
+    }*/
+
+    #firstDiv a {
+        height: 170px;
+        width: 950px;
+        color: black;
+        line-height: 170px;
+        text-align: center;
+        font-size: 200%;
+        text-decoration: none;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-weight: 300;
+        /*opacity: 0.2;*/
+    }
+
+    #navDiv {
+        border:1px solid darkgrey;
+        width: 950px;
+        margin: 0;
+        padding: 0;
+        background-color: whitesmoke;
+    }
+
+    #navDiv li {
+        float: left;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        height: 62px;
+        width: 20%;
+    }
+    #navDiv a {
+        display: block;
+        height: 62px;
+        line-height: 62px;
+        text-align: center;
+        background-color: #FAFAFA;
+        text-decoration: none;
+        color: black;
+        font-size: 135%;
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-weight: 300;
+    }
+    #navDiv a:hover {
+        color: white;
+        background-color: black;
+        font-size: 150%;
+    }
+
+    #mainDiv{
+        border:1px solid antiquewhite;
+        height: 1800px;
+        width: 950px;
+        margin: 62px 0 0 0;
+        background-color: transparent;
+    }
+
+    #candidates{
+        /*border:1px solid black;*/
+        height: 250px;
+        width: 100%;
+        background-image: url("candidates.png");
+        background-size: 100%;
+    }
+
+    #google {
+
+        height: 715px;
+        width: 100%;
+        background-image: url("google0508.png");
+        background-size: 100%;
+    }
+
+    #naver {
+        /*border:1px solid black;*/
+        height: 393px;
+        width: 100%;
+        background-image: url("naver0508.png");
+        background-size: 100%;
+    }
+
+    #twitter {
+        /*border:1px solid black;*/
+        height: 360px;
+        width: 100%;
+        background-image: url("twitter0509.png");
+        background-size: 100%;
+    }
+
+    #footerDiv{
+        height: 50px;
+        width: 950px;
+        background-color: lightgray;
+    }
+rem as of remedy
+
+</style>
+</head>
+<body>
+<div id="firstDiv">
+    <a href="#">  </a>  </div>
+<ul id="navDiv">
+    <li><a id="nav1" href="intro.html">Introduction</a></li>
+    <li><a id="nav2" href="#">Polling</a></li>
+    <li><a id="nav3" href="trends.html">Trends</a></li>
+    <li><a id="nav4" href="#">Results</a></li>
+    <li><a id="nav5" href="#">Methodology</a></li>
+</ul>
+<div id="mainDiv">
+    <div id="candidates"></div>
+    <div id="google"></div>
+    <div id="naver"></div>
+    <div id="twitter"></div>
+</div>
+<div id="footerDiv">  </div>
+</body>
+</html>

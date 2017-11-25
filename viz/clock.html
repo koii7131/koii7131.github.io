@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Clock</title>
+  <style>
+    body{
+      background-color: #F7F7F7;
+    }
+
+    p {
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      color: white;
+      background-color: #1C1C1C;
+    }
+
+    svg {
+      border: 3px solid black; /*dashed*/
+      border-radius: 50%;
+      display: block;
+      margin: auto;
+    }
+
+    h4 {
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+
+<br>
+    <svg width = "300" height="300">
+      <circle cx="150" cy="150" r="150" fill="#FFFFFF"/>
+      <circle cx="150" cy="150" r="4" stroke="black" storke-width="2" fill="#000000"/>
+      <line
+            id = "sec" stroke-linecap="round"
+            x1="150" y1="150" x2="150" y2="20"
+            stroke="red" stroke-width="2"
+            style="transform-origin: 150px 150px; transform: rotate(0deg);"
+      />
+        <line
+            id = "min" stroke-linecap="round"
+            x1="150" y1="150" x2="150" y2="40"
+            stroke="black" stroke-width="4"
+            style="transform-origin: 150px 150px; transform: rotate(0deg);"
+      />
+        <line
+            id = "hour" stroke-linecap="round"
+            x1="150" y1="150" x2="150" y2="70"
+            stroke="black" stroke-width="8"
+            style="transform-origin: 150px 150px; transform: rotate(0deg);"
+      />
+    </svg>
+    <br>
+    <p class="timeKr"></p>
+    <p class="timeEn"></p>
+    <br>
+    <h4> 사용 언어 </h4>
+  <script>
+  var lastUpdate = Date.now();
+
+    function render() {
+      window.requestAnimationFrame(render);
+      var now = Date.now();
+      if (now - lastUpdate < 1000) return;
+      lastUpdate = now;
+
+      var now = new Date();
+        var h = now.getHours();
+        var m = now.getMinutes();
+        var s = now.getSeconds();
+        var yr = now.getFullYear();
+        var mo = now.getMonth();
+        var da = now.getDate();
+        var dayskr = new Array(7);
+        dayskr[0] = "일";
+        dayskr[1] = "월";
+        dayskr[2] = "화";
+        dayskr[3] = "수";
+        dayskr[4] = "목";
+        dayskr[5] = "금";
+        dayskr[6] = "토";
+        var daykr = dayskr[now.getDay()];
+
+        var month = new Array();
+        month[0] = "Jan";
+        month[1] = "Feb";
+        month[2] = "Mar";
+        month[3] = "Apr";
+        month[4] = "May";
+        month[5] = "June";
+        month[6] = "July";
+        month[7] = "Aug";
+        month[8] = "Sep";
+        month[9] = "Oct";
+        month[10] = "Nov";
+        month[11] = "Dec";
+        var moen = month[now.getMonth()];
+
+        var daysen = new Array(7);
+        daysen[0] = "Sun";
+        daysen[1] = "Mon";
+        daysen[2] = "Tues";
+        daysen[3] = "Weds";
+        daysen[4] = "Thur";
+        daysen[5] = "Fri";
+        daysen[6] = "Sat";
+        var dayen = daysen[now.getDay()];
+
+        var timekr = '한국은 현재 '+yr+'년 '+mo+'월 '+da+'일 ('+daykr+'), '+h+'시 '+m+'분 '+s+'초 입니다.';
+        var timeen = 'It\'s currently '+moen+', '+da+', '+yr+' ('+dayen+'), '+(h-16)+':'+m+':'+s+' in San Francisco.'
+        window.document.querySelector('p.timeKr').innerHTML = timekr;
+        window.document.querySelector('p.timeEn').innerHTML = timeen;
+        //window.document.querySelector('p.timeEn').innerHTML = now;
+
+        var degSec = s / 60 * 360;
+        window.document.querySelector('#sec').style.transform = 'rotate(' + degSec + 'deg)';
+        var degMin = m / 60 * 360;
+        window.document.querySelector('#min').style.transform = 'rotate(' + degMin + 'deg)';
+        var degHour = (h + m / 60) / 12 * 360;
+        window.document.querySelector('#hour').style.transform = 'rotate(' + degHour + 'deg)';
+    }
+
+    render();
+
+    //새로고침 안해도 100ms(=1s)마다 한번씩 "render"펑션이 실행되도록 만듬.
+    //window.setInterval(render, 1000);
+  </script>
+</body>
+</html>
+
+
+
+<br><br>
+
+<!--
+<strong>Nominal</strong>: 1호선 2호선 3호선 <br>
+<strong>Ordinal</strong>: 1등 2등 3등 <br>
+<strong>Interval</strong>: 1도 2도 3도씨 (등간격으로 순서가 있으나 비율을 말할 수 없음. 20도씨는 10도씨의 두배가 아니다. 0도가 열이 없는 상태가 아니기 때문. 절대온도 영하 273도가 열이 없는 상태.)<br>
+<strong>Ratio</strong>: 10cm, 20cm, 30cm (등간격, 순서, 비율) ... 절대온도가 10k(kelvin 온도)인 경우 ratio로 표현 가능
+-->

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="seoulcss.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Carter+One" rel="stylesheet">
+</head>
+
+<body>
+    <h1 id="title"> title </h1>
+<svg height="500">
+    <g>
+        <g class="line0"><path /></g>
+        <g class="line1"><path /></g>
+        <g class="area"><path /></g>
+        <g class="axis axis--x"></g>
+        <g class="axis axis--y"><text /></g>
+    </g>
+</svg>
+
+<div class="wrap">
+    <a href="#tmin,tmax" data-title="Min & Max" class="button" id="minMax">Min & Max</a>
+    <a href="#tnight,tmorn" data-title="Morn & Night" class="button" id="morningAndNight">Morn. & Night</a>
+    <a href="#teve,tday" data-title="Day & Eve" class="button" id="dayEve">Day & Eve</a>
+    <a href="hum.html" class="button1" id="hum">Hum</a>
+</div>
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+var key0;
+var key1;
+var title;
+var data = [];
+var parseTime = d3.timeParse("%Y-%m-%d");
+
+d3.csv("final.csv", type, function(error, newData) {
+  if (error) throw error;
+
+  window.addEventListener('resize', update);
+  //window.addEventListener('resize', updateHum);
+  d3.selectAll('a.button').on('click', function() {
+    window.setTimeout(update, 10);
+  });
+  //d3.selectAll('a.button1').on('click', function() {
+//    window.setTimeout(updateHum, 10);
+//  });
+
+  data = newData;
+  update();
+});
+    
+function update() {
+var line0 = d3.line()
+    //.curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d[key0]); })
+var line1 = d3.line()
+    //.curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d[key1]); });
+
+var svg = d3.select("svg").attr('width', window.innerWidth),
+    margin = {top: 20, right: 40, bottom: 30, left: 50},
+    width = svg.attr("width") - margin.left - margin.right,
+    height = svg.attr("height") - margin.top - margin.bottom,
+    g = svg.select("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var x = d3.scaleTime().range([0, width]),
+    y = d3.scaleLinear().range([height, 0]);
+
+var area = d3.area()
+    //.curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y0(function(d) { return y(d[key0]); })
+    .y1(function(d) { return y(d[key1]); });
+
+var titles = {
+      'tmin,tmax': 'Min & Max Temperature',
+      'tnight,tmorn': 'Morning & Night',
+      'teve,tday': 'Day & Evening'
+  };
+  var keys = location.href.split('#')[1] || 'tmin,tmax';
+  var tokens = keys.split(',');
+  key0 = tokens[0];
+  key1 = tokens[1];
+
+  document.querySelector('#title').innerHTML = titles[keys];
+
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+
+  y.domain([
+      d3.min(data, function(d) {return d['tmin'];}),
+      d3.max(data, function(d) {return d['tmax'];})
+  ]);
+
+  g.select("g.line0 path")             //upper line
+      .transition()
+      .attr('fill', 'none')
+      .attr('stroke', 'blue')
+      .attr('stroke-width', 3)
+      //.style("stroke-dasharray", ("10,3"))
+      .attr("d", line0(data))
+      .style("opacity", .4)    
+  g.select("g.line1 path")             //lower line
+      .transition()
+      .attr('fill', 'none')
+      .attr('stroke', 'red')
+      .attr('stroke-width', 3)
+      //.style("stroke-dasharray", ("10,3"))
+      .attr("d", line1(data))
+      .style("opacity", .4);   
+  g.select("g.area path")             //area
+      .transition()
+      .attr('fill', '#EEE')
+      .attr("d", area(data));
+  g.select("g.axis--x")             //xAxis
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).tickSizeInner(-height));
+  g.select("g.axis--y")             //yAxis
+      .call(d3.axisLeft(y).tickSizeInner(-width))
+      .select("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("fill", "#000")
+      .text("Temperature, ºC");
+}
+
+function updateHum (){
+var line0 = d3.line()
+    .curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.hum); })
+var line1 = d3.line()
+    //.curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y(function(d) { return y(d.hum); });
+var svg = d3.select("svg").attr('width', window.innerWidth),
+    margin = {top: 20, right: 40, bottom: 30, left: 50},
+    width = svg.attr("width") - margin.left - margin.right,
+    height = svg.attr("height") - margin.top - margin.bottom,
+    g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+var x = d3.scaleTime().range([0, width]),
+    y = d3.scaleLinear().range([height, 0]);
+
+var area = d3.area()
+    //.curve(d3.curveBasis)
+    .x(function(d) { return x(d.date); })
+    .y0(function(d) { return y(d.hum); })
+    .y1(function(d) { return y(d.hum); });
+    
+  x.domain(d3.extent(data, function(d) { return d.date; }));
+  y.domain([
+      d3.min(data, function(d) {return d.hum;}),
+      d3.max(data, function(d) {return d.hum;})
+  ]);
+
+  g.append("g")             //upper line
+      .attr("class", "line0")
+      .append("path")
+      .attr('fill', 'none')
+      .attr('stroke', 'darkblue')
+      .attr('stroke-width', 2)
+      //.style("stroke-dasharray", ("10,3"))
+      .attr("d", line0(data))
+      .style("opacity", .4);
+  g.append("g")             //lower line
+      .attr("class", "line1")
+      .append("path")
+      .attr('fill', 'none')
+      .attr('stroke', 'red')
+      .attr('stroke-width', 3)
+      //.style("stroke-dasharray", ("10,3"))
+      .attr("d", line1(data))
+      .style("opacity", 0);   
+  g.append("g")             //area
+      .attr("class", "area")
+      .append("path")
+      .attr('fill', '#EEE')
+      .attr("d", area(data));
+  g.append("g")             //xAxis
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).tickSizeInner(-height));
+  g.append("g")             //yAxis
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(y).tickSizeInner(-width))
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("fill", "#000")
+      .text("Humidity, %");
+    
+}
+function type(d, _, columns) {
+  d.date = parseTime(d.date);
+  for (var i = 2, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
+  return d;
+}
+
+</script>
+</body>
+</html>
