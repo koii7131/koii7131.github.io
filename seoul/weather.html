@@ -48,7 +48,7 @@ d3.csv("final.csv", type, function(error, newData) {
   data = newData;
   update();
 });
-    
+
 function update() {
 var line0 = d3.line()
     //.curve(d3.curveBasis)
@@ -100,7 +100,7 @@ var titles = {
       .attr('stroke-width', 3)
       //.style("stroke-dasharray", ("10,3"))
       .attr("d", line0(data))
-      .style("opacity", .4)    
+      .style("opacity", .4)
   g.select("g.line1 path")             //lower line
       .transition()
       .attr('fill', 'none')
@@ -108,7 +108,7 @@ var titles = {
       .attr('stroke-width', 3)
       //.style("stroke-dasharray", ("10,3"))
       .attr("d", line1(data))
-      .style("opacity", .4);   
+      .style("opacity", .4);
   g.select("g.area path")             //area
       .transition()
       .attr('fill', '#EEE')
@@ -149,7 +149,7 @@ var area = d3.area()
     .x(function(d) { return x(d.date); })
     .y0(function(d) { return y(d.hum); })
     .y1(function(d) { return y(d.hum); });
-    
+
   x.domain(d3.extent(data, function(d) { return d.date; }));
   y.domain([
       d3.min(data, function(d) {return d.hum;}),
@@ -173,7 +173,7 @@ var area = d3.area()
       .attr('stroke-width', 3)
       //.style("stroke-dasharray", ("10,3"))
       .attr("d", line1(data))
-      .style("opacity", 0);   
+      .style("opacity", 0);
   g.append("g")             //area
       .attr("class", "area")
       .append("path")
@@ -192,7 +192,7 @@ var area = d3.area()
       .attr("dy", "0.71em")
       .attr("fill", "#000")
       .text("Humidity, %");
-    
+
 }
 function type(d, _, columns) {
   d.date = parseTime(d.date);
