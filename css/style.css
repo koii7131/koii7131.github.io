@@ -93,7 +93,7 @@ font header .navbar-default .navbar-nav li a:hover {
   background-size: cover;
   background-attachment: fixed;
   background-position: 10% 0%;
-  padding: 150px 0 180px 0;
+  padding: 100px 0 100px 0;
   position: relative;
 }
 #slider:before {
@@ -233,7 +233,7 @@ font header .navbar-default .navbar-nav li a:hover {
 	Feature Start
 --*/
 #feature {
-  background: url("../img/featue-bg.jpg");
+  background: url("../img/data3.jpg");
   background-position: 50% 94px;
   width: 100%;
   display: block;
