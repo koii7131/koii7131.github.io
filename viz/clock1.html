@@ -27,10 +27,12 @@
       text-align: center;
     }
 
+
   </style>
 </head>
 <body>
 
+<br>
 <br>
     <svg width = "300" height="300">
       <circle cx="150" cy="150" r="150" fill="#FFFFFF"/>
@@ -56,9 +58,10 @@
     </svg>
     <br>
     <p class="timeKr"></p>
-    <p class="timeEn"></p>
-    <br>
-    <h4> 사용 언어 </h4>
+  <!--  <p class="timeEn"></p> -->
+
+
+  <script src="//d3js.org/d3.v3.min.js"></script>
   <script>
   var lastUpdate = Date.now();
 
@@ -85,35 +88,35 @@
         dayskr[6] = "토";
         var daykr = dayskr[now.getDay()];
 
-        var month = new Array();
-        month[0] = "Jan";
-        month[1] = "Feb";
-        month[2] = "Mar";
-        month[3] = "Apr";
-        month[4] = "May";
-        month[5] = "June";
-        month[6] = "July";
-        month[7] = "Aug";
-        month[8] = "Sep";
-        month[9] = "Oct";
-        month[10] = "Nov";
-        month[11] = "Dec";
-        var moen = month[now.getMonth()];
-
-        var daysen = new Array(7);
-        daysen[0] = "Sun";
-        daysen[1] = "Mon";
-        daysen[2] = "Tues";
-        daysen[3] = "Weds";
-        daysen[4] = "Thur";
-        daysen[5] = "Fri";
-        daysen[6] = "Sat";
-        var dayen = daysen[now.getDay()];
+        // var month = new Array();
+        // month[0] = "Jan";
+        // month[1] = "Feb";
+        // month[2] = "Mar";
+        // month[3] = "Apr";
+        // month[4] = "May";
+        // month[5] = "June";
+        // month[6] = "July";
+        // month[7] = "Aug";
+        // month[8] = "Sep";
+        // month[9] = "Oct";
+        // month[10] = "Nov";
+        // month[11] = "Dec";
+        // var moen = month[now.getMonth()];
+        //
+        // var daysen = new Array(7);
+        // daysen[0] = "Sun";
+        // daysen[1] = "Mon";
+        // daysen[2] = "Tues";
+        // daysen[3] = "Weds";
+        // daysen[4] = "Thur";
+        // daysen[5] = "Fri";
+        // daysen[6] = "Sat";
+        // var dayen = daysen[now.getDay()];
 
         var timekr = '한국은 현재 '+yr+'년 '+mo+'월 '+da+'일 ('+daykr+'), '+h+'시 '+m+'분 '+s+'초 입니다.';
-        var timeen = 'It\'s currently '+moen+', '+da+', '+yr+' ('+dayen+'), '+(h-16)+':'+m+':'+s+' in San Francisco.'
+  //      var timeen = 'It\'s currently '+moen+', '+da+', '+yr+' ('+dayen+'), '+(h-16)+':'+m+':'+s+' in San Francisco.'
         window.document.querySelector('p.timeKr').innerHTML = timekr;
-        window.document.querySelector('p.timeEn').innerHTML = timeen;
+  //      window.document.querySelector('p.timeEn').innerHTML = timeen;
         //window.document.querySelector('p.timeEn').innerHTML = now;
 
         var degSec = s / 60 * 360;
