@@ -35,11 +35,11 @@ d3.csv("final.csv", type, function(error, data) {
 //function updateHum(){
 var line0 = d3.line()
     .curve(d3.curveBasis)
-    .x(function(d) { return x(d.date); })
+    .x(function(d) { return x(d.day); })
     .y(function(d) { return y(d.hum); })
 var line1 = d3.line()
     //.curve(d3.curveBasis)
-    .x(function(d) { return x(d.date); })
+    .x(function(d) { return x(d.day); })
     .y(function(d) { return y(d.hum); });
 var svg = d3.select("svg").attr('width', window.innerWidth),
     margin = {top: 20, right: 40, bottom: 30, left: 50},
@@ -52,11 +52,11 @@ var x = d3.scaleTime().range([0, width]),
 
 var area = d3.area()
     //.curve(d3.curveBasis)
-    .x(function(d) { return x(d.date); })
+    .x(function(d) { return x(d.day); })
     .y0(function(d) { return y(d.hum); })
     .y1(function(d) { return y(d.hum); });
     
-  x.domain(d3.extent(data, function(d) { return d.date; }));
+  x.domain(d3.extent(data, function(d) { return d.day; }));
 
   y.domain([
       d3.min(data, function(d) {return d.hum;}),
@@ -104,7 +104,7 @@ var area = d3.area()
 });
     
 function type(d, _, columns) {
-  d.date = parseTime(d.date);
+  d.day = parseTime(d.day);
   for (var i = 2, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
   return d;
 }

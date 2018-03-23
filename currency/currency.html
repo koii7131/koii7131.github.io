@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> currency </title>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  <style>
+      *{
+          font-size: 10px;
+          font-family: 'Open Sans', sans-serif;
+      }
+      td{
+          border: 1px solid lightgray;
+          padding: 3px 18px 3px 8px;
+          font-size: 15px;
+          font-family: 'Open Sans', sans-serif;
+          
+      }
+      
+  </style>
+</head>
+<body>
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <!--<svg width="960" height="500"></svg>-->
+  <script>
+  var colNames = {
+      'currency': 'Currency',
+      'base_rate': 'Base Rate',
+      'usd_conv_rate': 'Conv Rate',
+      'spark_line':'Spark Line'
+  };
+//  ['currency','date','base_rate','usd_conv_rate','spark_line']
+  //var currency = [['data1', 'data2', 'data3'],['data4', 'data5', 'data6']]
+      
+  var tabulate = function (data, columns) {
+      var table = d3.select('body').append('table')
+      var thead = table.append('thead')
+      var tbody = table.append('tbody')
+      
+      thead.append('tr')
+      .selectAll('th')
+      .data(columns)
+      .enter()
+      .append('th')
+      .text(function(d){return colNames[d];})
+      
+      var rows = tbody.selectAll('tr')
+      .data(data)
+      .enter()
+      .append('tr')
+      
+      var cells = rows.selectAll('td')
+      .data(function(row){
+          return columns.map(function(column){
+              return { column: column, value: row[column]}
+          })
+      })
+      .enter()
+      .append('td')
+      .text(function(d){return d.value})
+      
+      return table;
+  }
+      
+      d3.csv("final.csv", function(error,data){
+          if (error) throw error;
+          var columns = ['currency','base_rate','usd_conv_rate','spark_line']
+          tabulate(data,columns)
+          console.log(data)
+          var nestedData = d3.nest()
+            .key(function(d) {return d['currency']})
+            .entries(data);
+          console.log(nestedData);hhytuu
+      })
+      
+// var filteredData =  d3.filter(function(data){
+//        return data[];
+//    });
+      
+//  d3.select('body')
+//    .append('table')
+//    .selectAll('tr')
+//    .data(data)
+//    .enter().append('tr')
+//    .selectAll('td')
+//    .data(d => d)
+//    .enter()
+//    .append('td')
+//    .text(d => d);
+//      
+//       });
+  </script>
+</body>
+</html>

@@ -33,9 +33,9 @@ var title;
 var data = [];
 var parseTime = d3.timeParse("%Y-%m-%d");
 
+// 데이터를 가져옵니다.
 d3.csv("final.csv", type, function(error, newData) {
   if (error) throw error;
-
   window.addEventListener('resize', update);
   //window.addEventListener('resize', updateHum);
   d3.selectAll('a.button').on('click', function() {
@@ -44,36 +44,39 @@ d3.csv("final.csv", type, function(error, newData) {
   //d3.selectAll('a.button1').on('click', function() {
 //    window.setTimeout(updateHum, 10);
 //  });
-
   data = newData;
   update();
 });
 
+// 화면의 크기가 변할 때 인터렉티브하게 시각화 업데이트
 function update() {
 var line0 = d3.line()
     //.curve(d3.curveBasis)
-    .x(function(d) { return x(d.date); })
+    .x(function(d) { return x(d.day); })
     .y(function(d) { return y(d[key0]); })
 var line1 = d3.line()
     //.curve(d3.curveBasis)
-    .x(function(d) { return x(d.date); })
+    .x(function(d) { return x(d.day); })
     .y(function(d) { return y(d[key1]); });
 
+// 넓이는 화면의 넓이
 var svg = d3.select("svg").attr('width', window.innerWidth),
     margin = {top: 20, right: 40, bottom: 30, left: 50},
     width = svg.attr("width") - margin.left - margin.right,
     height = svg.attr("height") - margin.top - margin.bottom,
     g = svg.select("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+// 넓이와 높이
 var x = d3.scaleTime().range([0, width]),
     y = d3.scaleLinear().range([height, 0]);
 
 var area = d3.area()
     //.curve(d3.curveBasis)
-    .x(function(d) { return x(d.date); })
+    .x(function(d) { return x(d.day); })
     .y0(function(d) { return y(d[key0]); })
     .y1(function(d) { return y(d[key1]); });
 
+// 시각화할 내용의 제목
 var titles = {
       'tmin,tmax': 'Min & Max Temperature',
       'tnight,tmorn': 'Morning & Night',
@@ -86,7 +89,7 @@ var titles = {
 
   document.querySelector('#title').innerHTML = titles[keys];
 
-  x.domain(d3.extent(data, function(d) { return d.date; }));
+  x.domain(d3.extent(data, function(d) { return d.day; }));
 
   y.domain([
       d3.min(data, function(d) {return d['tmin'];}),
@@ -129,11 +132,11 @@ var titles = {
 function updateHum (){
 var line0 = d3.line()
     .curve(d3.curveBasis)
-    .x(function(d) { return x(d.date); })
+    .x(function(d) { return x(d.day); })
     .y(function(d) { return y(d.hum); })
 var line1 = d3.line()
     //.curve(d3.curveBasis)
-    .x(function(d) { return x(d.date); })
+    .x(function(d) { return x(d.day); })
     .y(function(d) { return y(d.hum); });
 var svg = d3.select("svg").attr('width', window.innerWidth),
     margin = {top: 20, right: 40, bottom: 30, left: 50},
@@ -146,11 +149,11 @@ var x = d3.scaleTime().range([0, width]),
 
 var area = d3.area()
     //.curve(d3.curveBasis)
-    .x(function(d) { return x(d.date); })
+    .x(function(d) { return x(d.day); })
     .y0(function(d) { return y(d.hum); })
     .y1(function(d) { return y(d.hum); });
 
-  x.domain(d3.extent(data, function(d) { return d.date; }));
+  x.domain(d3.extent(data, function(d) { return d.day; }));
   y.domain([
       d3.min(data, function(d) {return d.hum;}),
       d3.max(data, function(d) {return d.hum;})
@@ -195,7 +198,7 @@ var area = d3.area()
 
 }
 function type(d, _, columns) {
-  d.date = parseTime(d.date);
+  d.day = parseTime(d.day);
   for (var i = 2, n = columns.length, c; i < n; ++i) d[c = columns[i]] = +d[c];
   return d;
 }
